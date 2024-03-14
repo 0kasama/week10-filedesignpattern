@@ -1,4 +1,4 @@
-const pool = require("../config");
+const pool = require("../config/config.js");
 
 class UserModel {
   static getUsers = async (next) => {
