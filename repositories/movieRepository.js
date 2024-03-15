@@ -33,6 +33,14 @@ class MovieRepository {
     }
   };
 
+  static upload = async (id, fileName, next) => {
+    try {
+      return await MovieModel.upload(id, fileName, next);
+    } catch (error) {
+      next(error);
+    }
+  };
+
   static deleteMovie = (id, next) => {
     try {
       return MovieModel.deleteMovie(id, next);

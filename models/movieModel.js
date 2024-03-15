@@ -56,6 +56,20 @@ class MovieModel {
     }
   };
 
+  static upload = async (id, fileName, next) => {
+    try {
+      const uploadQuery = `UPDATE movies
+                            SET photo=$1
+                            WHERE id=$2
+                            RETURNING *;`;
+
+      const data = await pool.query(uploadQuery, [fileName, id]);
+      return data.rows[0];
+    } catch (error) {
+      next(error);
+    }
+  };
+
   static deleteMovie = async (id, next) => {
     try {
       const deleteQuery = `DELETE FROM movies 
@@ -64,7 +78,6 @@ class MovieModel {
       `;
 
       const data = await pool.query(deleteQuery, [id]);
-
       return data.rows[0];
     } catch (error) {
       next(error);

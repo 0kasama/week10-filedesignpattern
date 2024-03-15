@@ -39,6 +39,19 @@ class MovieController {
     }
   };
 
+  static uploads = async (req, res, next) => {
+    try {
+      const url = await MovieService.uploads(req.file);
+
+      res.status(201).json({
+        message: "Upload Success",
+        image_url: url,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   static deleteMovie = async (req, res, next) => {
     try {
       const { id } = req.params;

@@ -33,6 +33,20 @@ class MovieService {
     }
   };
 
+  static uploads = async (file) => {
+    try {
+        if(file) {
+            const url = `http://localhost:3000/uploads/${file.filename}`
+
+            return url;
+        } else {
+            throw {name: "MissingFile"}
+        }
+    } catch(err) {
+        throw err;
+    }
+}
+
   static deleteMovie = (id, next) => {
     try {
       return MovieRepository.deleteMovie(id, next);
